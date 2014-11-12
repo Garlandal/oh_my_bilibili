@@ -6,7 +6,7 @@
 
 首先安装所需的库
 ``` bash
-$sudo pip install requests
+$ sudo pip install requests
 ```
 使用方法
 ```
