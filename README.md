@@ -6,7 +6,7 @@
 
 首先安装所需的库
 ``` bash
-$sudo pip install reuqests
+$sudo pip install requests
 ```
 使用方法
 ```
@@ -19,8 +19,11 @@ $sudo pip install reuqests
 ```
 就会下载LoveLive！第一季第13话的弹幕信息
 
+然后就能愉快地补番了~
+
 ##Todo
-- [ ] 下载完成自动打开 
+- [x] 下载完成自动打开 
 - [ ] 分析文件名自动获取弹幕
 - [ ] 优化弹幕排布算法
+- [ ] 对于自带字幕的，解析后合并进弹幕字幕
 - [ ] balabala 

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+#设置弹幕加载完成后是否自动打开
 ENALLE_OPEN = 'on'
 
 SCRIPT_INFO = {
@@ -14,8 +15,8 @@ SCRIPT_INFO = {
 V4_STYLES = {
     'Format': 'Name,Fontname,Fontsize,PrimaryColour,SecondaryColour,TertiaryColour,BackColour,Bold,Italic,BorderStyle,Outline,Shadow,Alignment,MarginL,MarginR,MarginV,AlphaLevel,Encoding',
     'Style': (
-    	'{style},WenQuanYi Micro Hei,10,16777215,4227327,8404992,00000000,0,0,1,1,0,0,0,0,150,0,136',
-    	'{style},WenQuanYi Micro Hei,10,{color_code},4227327,8404992,16777215,0,0,1,1,0,0,0,0,150,0,136',
+    	'{style},WenQuanYi Micro Hei,10,16777215,4227327,8404992,00000000,0,0,1,1,0,0,0,0,107,0,136',
+    	'{style},WenQuanYi Micro Hei,10,{color_code},4227327,8404992,16777215,0,0,1,1,0,0,0,0,107,0,136',
     	'{style},WenQuanYi Micro Hei,10,{color_code},4227327,8404992,16777215,0,0,1,1,0,6,0,0,0,0,136', 
     	'{style},WenQuanYi Micro Hei,10,16777215,4227327,8404992,00000000,0,0,1,1,0,6,0,0,0,0,136',
     	)

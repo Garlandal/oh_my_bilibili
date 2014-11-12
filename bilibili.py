@@ -2,6 +2,8 @@
 # coding=utf-8
 
 from __future__ import division
+from collections import defaultdict
+from collections import Counter
 
 import sys
 import re
@@ -12,14 +14,12 @@ import config
 import time
 import copy
 import os
-import random
-from collections import defaultdict
-from collections import Counter
+
 
 
 class Danmu():
 
-	"""Download Danmu and save as ass file"""
+	"""Download Danmu and save as ssa file"""
 
 	def __init__(self):
 		self.comment_url = 'http://comment.bilibili.com/'
@@ -27,6 +27,7 @@ class Danmu():
 		self.v4_styles = config.V4_STYLES
 		self.events = config.EVENTS
 		self.item = ('[Script Info]','[v4 Styles] ','[Events]')
+
 		
 	def time_format(self, time, types):
 		time = float(time)
@@ -40,9 +41,10 @@ class Danmu():
 		
 
 	def get_danmu(self, url):
-		print '\033[1;32m解析視頻地址......\033[0m'
+		print '\033[1;36m喵娘正在启动 \033[1;32m【 OK 】\033[0m'
 		self.danmu_dict = {}
 		content = requests.get(url).content
+		print '\033[1;36m解析視頻地址 \033[1;32m【 OK 】\033[0m'
 		if len(content) < 10000:
 			return 0
 		pat0 = re.compile(r'bili-cid=(.*)&bili-aid')
@@ -60,7 +62,8 @@ class Danmu():
 			self.danmu_dict[danmu_detail[7]] = danmu_content.split(',')
 		len_danmu = [len(p[3]) for q,p in self.danmu_dict.iteritems()]
 		counts = Counter(len_danmu)
-		self.danmu_counts = sorted(counts.most_common(10))
+		self.danmu_counts = sorted(counts.most_common(20))
+		print '\033[1;36m全舰弹幕装填 \033[1;32m......\033[0m'
 
 
 
@@ -77,7 +80,6 @@ class Danmu():
 		del_list = [single_id for single_id, content in deal_dict.iteritems() if len(content[3]) not in count_list]
 		map(lambda x: deal_dict.pop(x), del_list)
 		self.danmu_list = []
-		print '\033[1;36m全舰弹幕装填 【OK】\033[0m'
 		for m,n in deal_dict.iteritems():
 			time_tup = self.time_format(n[0], n[1])
 			if n[2] != '16777215' and n[1] == '1':
@@ -96,9 +98,8 @@ class Danmu():
 				self.danmu_list.append(static_events.format(start_time = time_tup[0], end_time = time_tup[1],style = 'center16777215', text = n[3]))
 			elif n[1] != '1' and n[2] != '16777215':
 				self.danmu_list.append(static_events.format(start_time = time_tup[0], end_time = time_tup[1],style = 'center'+n[2], text = n[3]))
+		print '\033[1;36m弹幕装填完毕 \033[1;32m【 OK 】\033[0m'
 		
-
-			
 
 
 	def write_file(self, filename):
@@ -115,7 +116,13 @@ class Danmu():
 			f.writelines(self.item[2]+'\n')
 			for i in self.danmu_list:
 				f.writelines(i+'\n')
-		print '\033[1;32m弹幕装填类型 【普通】\033[0m'
+		print '\033[1;36m弹幕装填类型 \033[1;32m【普通】\033[0m'
+
+
+def deal_filename(filename):
+	return re.escape(filename)
+
+
 
 
 def main():
@@ -137,9 +144,9 @@ def main():
 			print 'this is helpdoc'
 		elif opt in ("-u", "--update"):
 			print 'the data is updating'
-	# if config.ENALLE_OPEN == 'on':
-		# command = 'xdg-open '+files
-		# os.system(command)
+	if config.ENALLE_OPEN == 'on':
+		command = 'xdg-open ' + deal_filename(files)
+		os.system(command)
 
 			
 if __name__ == '__main__':
